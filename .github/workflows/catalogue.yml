@@ -1,0 +1,58 @@
+name: Catalogue MAT-TECH
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalogue-prix
+  cancel-in-progress: false
+
+jobs:
+  actualiser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      CATALOGUE_BRANCH: ${{ github.event.repository.default_branch }}
+    steps:
+      - name: Lire le programme
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Vérifier PHP
+        run: |
+          php -r 'if (PHP_VERSION_ID < 80100) exit(1); foreach (["curl","dom","iconv"] as $e) if (!extension_loaded($e)) { fwrite(STDERR, "Extension manquante : $e\n"); exit(1); }'
+
+      - name: Tester les exports
+        run: php tests/export.php
+
+      - name: Relever les prix réels par lots
+        run: php scripts/collect.php --seconds=240 --jobs=80
+
+      - name: Vérifier le catalogue publié
+        run: node tests/site.cjs
+
+      - name: Publier les nouvelles observations
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/state.json data/robots.json public/catalogue.json public/health.json site/archive.js site/config.js
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Actualisation des relevés marchands"
+          git push origin "HEAD:$CATALOGUE_BRANCH"
+
+      - name: Préparer les fichiers à installer une seule fois sur OVH
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-a-deposer-sur-OVH
+          path: site/
+          retention-days: 1
+          if-no-files-found: error
