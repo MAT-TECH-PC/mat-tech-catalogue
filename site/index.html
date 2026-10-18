@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0d0e"><meta name="robots" content="noindex,nofollow">
+<title>MAT-TECH PC · Catalogue de composants</title>
+<link rel="icon" href="assets/icon.svg"><link rel="stylesheet" href="assets/app.css?v=github1">
+<script src="config.js" defer></script><script src="archive.js" defer></script><script src="assets/app.js?v=github1" defer></script></head><body>
+<div class="shell"><aside class="rail">
+ <a class="brand" href="./"><img src="assets/icon.svg" alt="" width="34" height="34"><span>MAT-TECH <em class="copper">PC</em><small>CATALOGUE VIVANT</small></span></a>
+ <nav class="nav" aria-label="Navigation principale"><button class="active" data-tab="catalogue">▦ &nbsp; Catalogue</button><button data-tab="drops">↘ &nbsp; Baisses <span class="count" id="dropCount">0</span></button><button data-tab="activity">◌ &nbsp; Activité</button><button data-tab="sources">⌁ &nbsp; Boutiques</button></nav>
+ <div class="section-label">LES COMPOSANTS</div><div class="cat" id="catNav"></div>
+ <div class="rail-foot"><strong>● Offres neuves uniquement</strong><br>Référence, vendeur et date de relevé.<a href="https://mat-tech-pc.fr/">Retour au site ↗</a></div>
+</aside><div class="main"><header class="top"><div class="crumb">L’atelier <b id="crumb">/ Catalogue</b></div><div class="top-right"><span class="demo-pill">PRIX DATÉS · TTC HORS LIVRAISON</span><span class="online" id="connection"><i class="dot"></i>Chargement…</span></div></header>
+<main><section class="hero"><div><p class="eyebrow">LE MARCHÉ, PIÈCE PAR PIÈCE</p><h1>Les bons composants.<br><span>Les prix relevés.</span></h1><p>Retrouve les offres neuves des boutiques connectées. Chaque produit garde sa référence exacte, ses vendeurs et la date de son relevé.</p></div><div class="hero-actions"><button class="button primary" id="refresh">↻ Actualiser les offres</button><span class="demo-note" id="refreshNote">Lecture des fiches marchandes · sans prix estimé</span></div></section>
+<div class="notice" id="notice" role="status"><strong>◆ RELEVÉS DATÉS</strong><div id="noticeText">Les prix proviennent des fiches des boutiques au moment du relevé. Ils peuvent évoluer ensuite.</div></div>
+<div class="notice" id="syncProgress" hidden><strong class="spinner">↻</strong><div id="syncText">Actualisation…</div><button id="stopSync" class="button">Arrêter après ce passage</button></div>
+<section class="stats" aria-label="État du catalogue"><div class="stat"><i>⌁</i><p><strong id="referenceCount">—</strong><small id="referenceLabel">références avec offre récente</small></p></div><div class="stat"><i>▣</i><p><strong id="sourceCount">—</strong><small id="sourceLabel">boutiques avec des offres</small></p></div><div class="stat"><i>↘</i><p><strong id="changesCount">—</strong><small>baisses réellement observées</small></p></div><div class="stat"><i>◷</i><p><strong id="lastRun">—</strong><small>dernier passage du programme</small></p></div></section>
+<section id="catalogueView">
+ <div class="section-head"><div><h2 id="title">Toutes les pièces</h2><p id="count">Chargement des offres…</p></div><span class="tag">● NEUF UNIQUEMENT</span></div>
+ <div class="controls"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Modèle, référence, EAN…" aria-label="Rechercher"><kbd>/</kbd></label><select id="seller" aria-label="Boutique"><option value="all">Toutes les boutiques</option></select><select id="brand" aria-label="Marque"><option value="all">Toutes les marques</option></select><select id="platform" aria-label="Plateforme"><option value="all">Toutes les plateformes</option><option>AM4</option><option>AM5</option><option>LGA1151</option><option>LGA1200</option><option>LGA1700</option><option>LGA1851</option><option>DDR4</option><option>DDR5</option></select><select id="sort" aria-label="Tri"><option value="recent">Derniers relevés</option><option value="price">Prix croissant</option><option value="price_desc">Prix décroissant</option><option value="drop">Plus fortes baisses</option></select></div>
+ <div class="chips" id="chips"></div><div class="chips silicon" id="siliconChips"><button class="active" data-silicon="all">Toutes les gammes CPU / GPU</button><button data-silicon="AMD">AMD</button><button data-silicon="Intel">Intel</button><button data-silicon="NVIDIA">NVIDIA</button></div>
+ <div class="grid" id="grid" aria-live="polite"></div><button class="button load-more" id="more" hidden>Voir davantage de composants</button>
+ <p class="footnote"><strong>Comment lire ce catalogue ?</strong> Prix TTC hors livraison relevés chez le vendeur indiqué. Les références exactes restent séparées. Un prix de plus de trois heures est masqué. Une offre déclarée indisponible ou insuffisamment documentée est exclue. La découverte est automatique et progressive : la couverture historique depuis l’époque AM4 reste non exhaustive.</p>
+</section>
+<section id="activityView" hidden><div class="section-head"><div><h2>Les variations observées</h2><p>Une variation compare deux relevés de la même référence chez le même vendeur.</p></div></div><div id="events" class="events"></div></section>
+<section id="sourcesView" hidden><div class="section-head"><div><h2>Les boutiques et leurs offres</h2><p>Seules les offres documentées, neuves et vendues directement par une boutique approuvée sont retenues.</p></div></div><div id="sources" class="source-grid"></div><p class="footnote">Amazon, TopAchat et Cybertek ne sont pas connectés dans cette version. L’absence d’une offre ne signifie pas qu’une boutique n’en vend pas : sa fiche peut être inaccessible ou manquer d’informations exploitables.</p></section>
+<footer>MAT-TECH PC · Catalogue automatique · Prix TTC hors livraison</footer>
+</main></div></div>
+<div class="drawer-back" id="back"><aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="detailTitle" tabindex="-1"><button class="close" id="close" aria-label="Fermer">×</button><div id="drawerContent"></div></aside></div>
+
+<noscript><p>Active JavaScript pour consulter les offres et utiliser le catalogue.</p></noscript>
+</body></html>
