@@ -1,2 +1,1 @@
-// Ce fichier est complété automatiquement lors du premier lancement GitHub.
-globalThis.MATTECH_DATA_URL = "";
+globalThis.MATTECH_DATA_URL = "https://raw.githubusercontent.com/MAT-TECH-PC/mat-tech-catalogue/main/public/catalogue.json";
